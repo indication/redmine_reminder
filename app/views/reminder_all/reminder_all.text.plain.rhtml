@@ -10,6 +10,7 @@ case @assigned_issues.length
 <% @assigned_issues.each do |issue| -%>
 * <%= issue.due_date %> - <%= "#{issue.project} - #{issue.tracker} ##{issue.id}: #{issue.subject}" %>
 <% end -%>
+
 <% end
 if @auth_issues.length > 0 
 case @auth_issues.length
@@ -21,6 +22,7 @@ case @auth_issues.length
 <% @auth_issues.each do |issue| -%>
 * <%= issue.due_date %> - <%= "#{issue.project} - #{issue.tracker} ##{issue.id}: #{issue.subject}" %>
 <% end -%>
+
 <% end
 if @watched_issues.length > 0 
 case @watched_issues.length
