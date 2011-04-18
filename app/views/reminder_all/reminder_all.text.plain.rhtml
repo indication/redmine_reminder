@@ -20,7 +20,7 @@ case @auth_issues.length
 <% end -%>
   
 <% @auth_issues.each do |issue| -%>
-  <%= issue_plain_string(issue) %>
+  <%= issue_plain_string_watchable(issue) %>
 <% end -%>
 
 <% end
@@ -33,7 +33,7 @@ case @watched_issues.length
 
 
 <% @watched_issues.each do |issue| -%>
-  <%= issue_plain_string(issue) %>
+  <%= issue_plain_string_watchable(issue) %>
 <% end -%>
 <% end -%>
 

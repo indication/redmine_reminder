@@ -14,3 +14,6 @@ en:
   mail_body_reminder_auth5: "%{count} issues that are created by you are due in the next %{days} %{day}:"
   mail_body_reminder_assigned5: "%{count} issues that are assigned to you are due in the next %{days} %{day}:"
   mail_body_reminder_watched5: "%{count} issues that are watched by you are due in the next %{days} %{day}:"
+  mail_body_reminder_past_due: "%{days} %{day} past due"
+  mail_body_reminder_to_deadline: "%{days} %{day} to deadline"
+  mail_body_reminder_not_assigned: "Not assigned"
