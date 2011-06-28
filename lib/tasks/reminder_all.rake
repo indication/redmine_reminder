@@ -47,6 +47,7 @@ class Reminder_all < Mailer
          :issues_url => url_for(:controller => 'issues', :action => 'index', :set_filter => 1, :assigned_to_id => user.id, :sort_key => 'due_date', :sort_order => 'asc')
     render_multipart('reminder_all', body) if (assigned_issues+auth_issues+watched_issues).uniq.size>0
   end
+
   def self.reminders_all(options={})
     days = options[:days] || 7
     project = options[:project] ? Project.find(options[:project]) : nil
@@ -57,6 +58,7 @@ class Reminder_all < Mailer
     s << "#{Project.table_name}.status = #{Project::STATUS_ACTIVE}"
     s << "#{Issue.table_name}.project_id = #{project.id}" if project
     s << "#{Issue.table_name}.tracker_id = #{tracker.id}" if tracker
+
     over_due = Array.new
     issues_by_assignee = Issue.find(:all, :include => [:status, :assigned_to, :project, :tracker],
                                           :conditions => s.conditions
@@ -131,14 +133,15 @@ class Reminder_all < Mailer
 	end	
       else
 	if assigned_tasks.length > 0 then
-		assigned_tasks.sort! {|a,b| b.due_date <=> a.due_date }
+		assigned_tasks.sort! {|a,b| a.due_date <=> b.due_date }
 	end
 	if auth_tasks.length > 0 then
-		auth_tasks.sort! {|a,b| b.due_date <=> a.due_date }
+		auth_tasks.sort! {|a,b| a.due_date <=> b.due_date }
 	end
 	if watched_tasks.length > 0 then
-		watched_tasks.sort! {|a,b| b.due_date <=> a.due_date }
+		watched_tasks.sort! {|a,b| a.due_date <=> b.due_date }
 	end
+
 	deliver_reminder_all(previous_user, assigned_tasks, auth_tasks, watched_tasks, days) unless previous_user.nil?
 	watched_tasks.clear
 	auth_tasks.clear

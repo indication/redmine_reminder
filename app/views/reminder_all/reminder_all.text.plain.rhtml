@@ -8,8 +8,9 @@ case @assigned_issues.length
 <% end -%>
       
 <% @assigned_issues.each do |issue| -%>
-* <%= issue.due_date %> - <%= "#{issue.project} - #{issue.tracker} ##{issue.id}: #{issue.subject}" %>
+  <%= issue_plain_string(issue) %>
 <% end -%>
+
 <% end
 if @auth_issues.length > 0 
 case @auth_issues.length
@@ -19,8 +20,9 @@ case @auth_issues.length
 <% end -%>
   
 <% @auth_issues.each do |issue| -%>
-* <%= issue.due_date %> - <%= "#{issue.project} - #{issue.tracker} ##{issue.id}: #{issue.subject}" %>
+  <%= issue_plain_string_watchable(issue) %>
 <% end -%>
+
 <% end
 if @watched_issues.length > 0 
 case @watched_issues.length
@@ -31,7 +33,7 @@ case @watched_issues.length
 
 
 <% @watched_issues.each do |issue| -%>
-* <%= issue.due_date %> - <%= "#{issue.project} - #{issue.tracker} ##{issue.id}: #{issue.subject}" %>
+  <%= issue_plain_string_watchable(issue) %>
 <% end -%>
 <% end -%>
 

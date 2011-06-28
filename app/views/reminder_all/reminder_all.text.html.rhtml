@@ -7,11 +7,12 @@ case @assigned_issues.length
 <%  else -%> <p><%= l(:mail_body_reminder_assigned5, :count => @assigned_issues.size, :days => @days, :day=>day_tag[@days>4 ? 5 : @days-1 ]  ) %></p>
 <% end -%>
 
+
 <ul>
 <% @assigned_issues.each do |issue| -%>
-  <li><%=h issue.due_date %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %></li>
+  <li><%=h reminder_date_formatter(issue.due_date) %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %> - <%= date_diff_in_words(issue.due_date)%> - <%= h issue.priority.name %> - <%= h issue.status.name %> - <%= h issue.done_ratio %>%</li>
 <% end -%>
-</ul>
+</ul><br />
 <% end
 if @auth_issues.length > 0
 case @auth_issues.length
@@ -22,9 +23,9 @@ case @auth_issues.length
 
 <ul>
 <% @auth_issues.each do |issue| -%>
-  <li><%=h issue.due_date %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %></li>
+  <li><%=h reminder_date_formatter(issue.due_date) %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %> - <%= date_diff_in_words(issue.due_date)%> - <%= h issue.priority.name %> - <%= h issue.status.name %> - <%= h issue.done_ratio %>% - <%= if issue.assigned_to.nil? then l(:mail_body_reminder_not_assigned) else h issue.assigned_to.name end %></li>
 <% end -%>
-</ul>
+</ul><br />
 <% end
 if @watched_issues.length > 0 
 case @watched_issues.length
@@ -33,9 +34,10 @@ case @watched_issues.length
 <%  else -%> <p><%= l(:mail_body_reminder_watched5, :count => @watched_issues.size, :days => @days, :days => @days, :day=>day_tag[@days>4 ? 5 : @days-1]) %></p>
 <% end -%>
 
+
 <ul>
 <% @watched_issues.each do |issue| -%>
-  <li><%=h issue.due_date %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %></li>
+  <li><%=h reminder_date_formatter(issue.due_date) %> - <%=h issue.project %> - <%=link_to("#{issue.tracker} ##{issue.id}", :controller => 'issues', :action => 'show', :id => issue, :only_path => false)%>: <%=h issue.subject %> - <%= date_diff_in_words(issue.due_date)%> - <%= h issue.priority.name %> - <%= h issue.status.name %> - <%= h issue.done_ratio %>% - <%= if issue.assigned_to.nil? then l(:mail_body_reminder_not_assigned) else h issue.assigned_to.name end %></li>
 <% end -%>
 </ul>
 <% end -%>
